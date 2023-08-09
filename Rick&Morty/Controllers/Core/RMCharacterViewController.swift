@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+/// Controller to show and browse Characters
 final class RMCharacterViewController: UIViewController {
 
     override func viewDidLoad() {
