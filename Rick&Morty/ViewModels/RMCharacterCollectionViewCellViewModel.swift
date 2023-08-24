@@ -9,6 +9,8 @@ import Foundation
 
 /// Model that handles configuring a single Character cell instance to be further used in Character list ViewModel
 final class RMCharacterCollectionViewCellViewModel {
+    
+//    constants to assign data from API response to appropriate properties in a character cell further
     public let characterName: String
     private let characterStatus: RMCharacterStatus
     private let characterImageUrl: URL?
@@ -22,10 +24,12 @@ final class RMCharacterCollectionViewCellViewModel {
         self.characterImageUrl = characterImageUrl
     }
     
+//    reffers to RMCharacterStatus enum to expose character's status String derectly to characterName
     public var charaterStatusText: String {
         return characterStatus.rawValue
     }
     
+//    makes an API callback to fetch character's image to use in a cell further
     public func fetchImage(handler: @escaping (Result<Data, Error>) -> Void) {
 //        TODO: Abstract to Image Manager
          guard let url = characterImageUrl else {

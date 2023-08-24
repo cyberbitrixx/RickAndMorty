@@ -83,6 +83,20 @@
 			path = APIResponseTypes;
 			sourceTree = "<group>";
 		};
+		0447480A2A98083B005B78CE /* DataTypes */ = {
+			isa = PBXGroup;
+			children = (
+				04B1E9682A6F6C2C008F61A5 /* RMCharacter.swift */,
+				04B1E9662A6F6C1C008F61A5 /* RMLocation.swift */,
+				04B1E96A2A6F6C45008F61A5 /* RMEpisode.swift */,
+				04234B492A83294200C011E2 /* RMOrigin.swift */,
+				04234B4B2A832A3D00C011E2 /* RMSingleLocation.swift */,
+				04234B4F2A832BF700C011E2 /* RMCharacterStatus.swift */,
+				04234B512A832C4200C011E2 /* RMCharactersGender.swift */,
+			);
+			path = DataTypes;
+			sourceTree = "<group>";
+		};
 		04B1E93F2A6F6372008F61A5 = {
 			isa = PBXGroup;
 			children = (
@@ -126,13 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				044748032A98039F005B78CE /* APIResponseTypes */,
-				04B1E9682A6F6C2C008F61A5 /* RMCharacter.swift */,
-				04B1E9662A6F6C1C008F61A5 /* RMLocation.swift */,
-				04B1E96A2A6F6C45008F61A5 /* RMEpisode.swift */,
-				04234B492A83294200C011E2 /* RMOrigin.swift */,
-				04234B4B2A832A3D00C011E2 /* RMSingleLocation.swift */,
-				04234B4F2A832BF700C011E2 /* RMCharacterStatus.swift */,
-				04234B512A832C4200C011E2 /* RMCharactersGender.swift */,
+				0447480A2A98083B005B78CE /* DataTypes */,
 			);
 			path = Models;
 			sourceTree = "<group>";

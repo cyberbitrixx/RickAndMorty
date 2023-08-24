@@ -10,8 +10,11 @@ import UIKit
 
 /// Single cell for a character
 final class RMCharacterCollectionViewCell: UICollectionViewCell {
+    
+//    create let for cell identifier String for convenience to register a cell further
     static let cellIdentifier = "RMCharacterCollectionViewCell"
     
+//    imageView for actual character's image in a cell
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -19,6 +22,7 @@ final class RMCharacterCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
+//    label for character's status data from RMCharacterStatus Model
     private let statusLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
@@ -27,6 +31,7 @@ final class RMCharacterCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+//    label for character's name
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
@@ -40,6 +45,7 @@ final class RMCharacterCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .secondarySystemBackground
+//        adding subViews here instead of doing it directly because contentView takes care of safe area for CollectionViews
         contentView.addSubViews(imageView, nameLabel, statusLabel)
         addConstraints()
     }
@@ -71,6 +77,7 @@ final class RMCharacterCollectionViewCell: UICollectionViewCell {
 
     }
     
+//    get rid of image, status and name data to prepare a cell for reusing
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
@@ -78,6 +85,7 @@ final class RMCharacterCollectionViewCell: UICollectionViewCell {
         statusLabel.text = nil
     }
     
+//    configure a cell with cell ViewModel
     public func configure(with viewModeel: RMCharacterCollectionViewCellViewModel) {
         nameLabel.text = viewModeel.characterName
         statusLabel.text = viewModeel.charaterStatusText

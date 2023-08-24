@@ -32,7 +32,7 @@ final class RMCharacterListView: UIView {
         collectionView.isHidden = false
         collectionView.alpha = 0
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-//        register a cell in collection view
+//        register a cell in a collection view
         collectionView.register(RMCharacterCollectionViewCell.self, forCellWithReuseIdentifier: RMCharacterCollectionViewCell.cellIdentifier )
         return collectionView
     }()

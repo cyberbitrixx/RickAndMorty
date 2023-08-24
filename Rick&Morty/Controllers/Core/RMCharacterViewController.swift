@@ -20,7 +20,7 @@ final class RMCharacterViewController: UIViewController {
         setUpView()
     }
     
-//          Set up Characeters List View with constraints
+//    sets up charactersListView in controller to display cells with characters
         private func setUpView() {
             view.addSubview(characterListView)
             NSLayoutConstraint.activate([
