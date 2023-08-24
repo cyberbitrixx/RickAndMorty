@@ -11,15 +11,17 @@ import UIKit
 /// Controller to show and browse Characters
 final class RMCharacterViewController: UIViewController {
     
+    private let characterListView = RMCharacterListView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         title = "Characters"
+        setUpView()
     }
     
 //          Set up Characeters List View with constraints
         private func setUpView() {
-            characterListView.delegate = self
             view.addSubview(characterListView)
             NSLayoutConstraint.activate([
                 characterListView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
