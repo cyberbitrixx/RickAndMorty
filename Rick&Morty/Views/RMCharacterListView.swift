@@ -46,6 +46,8 @@ final class RMCharacterListView: UIView {
         addSubViews(collectionView, spinner)
         addConstraints()
         spinner.startAnimating()
+//        sets up communication link between the viewModel and RMCharacterListViewViewModel to enable viewModel to notify RMCharacterListViewViewModel when data needs to be updated
+        viewModel.delegate = self
         viewModel.fetchCharacters()
         setUpCollectionView()
     }
@@ -77,18 +79,18 @@ final class RMCharacterListView: UIView {
 //    define data source for collection view which is Characters ViewModel to make cells being able to display actual data
         collectionView.dataSource = viewModel
         collectionView.delegate = viewModel
-        
-//        get rid of the spinner and show collection view with data
-        DispatchQueue.main.asyncAfter(deadline: .now()+2, execute: {
-            self.spinner.stopAnimating()
-            
-            self.collectionView.isHidden = false
-            
-//            animate spinner disappearance
-             UIView.animate(withDuration: 0.4) {
-                self.collectionView.alpha = 1
-            }
-        })
     }
 
+}
+
+//      tells collectionView to reload the data when data proccessing is ready
+extension RMCharacterListView: RMCharacterListViewViewModelDelegate {
+    func didLoadInialCharacters() {
+        spinner.stopAnimating()
+        collectionView.isHidden = false
+        collectionView.reloadData() // Initial fetch
+        UIView.animate(withDuration: 0.4) {
+            self.collectionView.alpha = 1
+        }
+    }
 }

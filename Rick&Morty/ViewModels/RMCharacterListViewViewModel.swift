@@ -7,8 +7,16 @@
 
 import UIKit
 
+//     protocol for notifying when initial character data is loaded
+protocol RMCharacterListViewViewModelDelegate: AnyObject {
+    func didLoadInialCharacters()
+}
+
 /// Model that handles Characters List View configuration (fetching characters data, configuring collection view/grid of cell instances). Also a data source and delegate for Characters List View
 final class RMCharacterListViewViewModel: NSObject {
+    
+//    delegate is a weak var to prevent retain cycles and thus prevent memory leaks
+    public weak var delegate: RMCharacterListViewViewModelDelegate?
     
     private var characters: [RMCharacter] = [] {
         didSet {
@@ -35,6 +43,10 @@ final class RMCharacterListViewViewModel: NSObject {
             case .success(let responseModel):
                 let results = responseModel.results
                 self?.characters = results
+//         makes collectionView explicitly reload on main thread when data is ready and proccessed to be displayed
+                DispatchQueue.main.async {
+                    self?.delegate?.didLoadInialCharacters()
+                }
             case .failure(let error):
                 print(String(describing: error))
             }

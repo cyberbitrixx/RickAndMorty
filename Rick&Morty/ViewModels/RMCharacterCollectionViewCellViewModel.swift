@@ -26,7 +26,7 @@ final class RMCharacterCollectionViewCellViewModel {
     
 //    reffers to RMCharacterStatus enum to expose character's status String derectly to characterName
     public var charaterStatusText: String {
-        return characterStatus.rawValue
+        return "Status: \(characterStatus.text)"
     }
     
 //    makes an API callback to fetch character's image to use in a cell further
