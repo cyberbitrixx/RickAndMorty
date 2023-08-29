@@ -7,10 +7,16 @@
 
 import UIKit
 
+//      provides a way for the RMCharacterListView to communicate back to it's delegate when a specific character cell is tapped by the user
+protocol RMCharacterListViewDelegate: AnyObject {
+    func rmCharacterListView(_ characterListView: RMCharacterListView, didSelectCharacter character: RMCharacter)
+}
 
 /// View that handles showing list of characters, loader animation, etc.
 final class RMCharacterListView: UIView {
     
+    public weak var delegate: RMCharacterListViewDelegate?
+        
     private let viewModel = RMCharacterListViewViewModel()
     
 //    create spinner indicator when opening the Characters View and data is loading
@@ -26,7 +32,7 @@ final class RMCharacterListView: UIView {
 //        define layout for collection view to control scroll direction and inset section layout
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 //        make collection view hidden by default to not be shown along with spinner while data is not fetched yet
         collectionView.isHidden = false
@@ -34,6 +40,8 @@ final class RMCharacterListView: UIView {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
 //        register a cell in a collection view
         collectionView.register(RMCharacterCollectionViewCell.self, forCellWithReuseIdentifier: RMCharacterCollectionViewCell.cellIdentifier )
+//        register footer loader view
+        collectionView.register(RMFooterLoadingCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "RMFooterLoadingCollectionReusableView")
         return collectionView
     }()
     
@@ -85,6 +93,10 @@ final class RMCharacterListView: UIView {
 
 //      tells collectionView to reload the data when data proccessing is ready
 extension RMCharacterListView: RMCharacterListViewViewModelDelegate {
+    func didSelectCharacter(_ character: RMCharacter) {
+        delegate?.rmCharacterListView(self, didSelectCharacter: character)
+    }
+    
     func didLoadInialCharacters() {
         spinner.stopAnimating()
         collectionView.isHidden = false
